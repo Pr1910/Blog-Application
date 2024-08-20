@@ -2,6 +2,7 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 const app = express();
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser')
 const authRoute = require('./routes/auth')
 const userRoute = require('./routes/users')
 const postRoute = require('./routes/posts')
@@ -20,6 +21,7 @@ const connectDB = async() =>{
 //middlewares
 dotenv.config();
 app.use(express.json());
+app.use(cookieParser());
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/api/posts', postRoute)

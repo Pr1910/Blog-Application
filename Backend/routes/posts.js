@@ -1,9 +1,10 @@
 const express=require('express')
 const router=express.Router()
-const Post=require('../models/Post')
+const Post=require('../models/Post');
+const verifyToken = require('../Middlewares/verifyToken');
 
 //create
-router.post("/create", async(req, res)=>{
+router.post("/create", verifyToken, async(req, res)=>{
     try {   
         const newPost = new Post(req.body);
         const savedPost = await newPost.save();
@@ -14,7 +15,7 @@ router.post("/create", async(req, res)=>{
 })
 
 //update
-router.put("/:id", async(req, res) => {
+router.put("/:id", verifyToken, async(req, res) => {
     try {
         const updatedPost = await Post.findByIdAndUpdate(req.params.id, {$set:req.body}, {new: true});
         res.status(200).json(updatedPost);
@@ -25,7 +26,7 @@ router.put("/:id", async(req, res) => {
 })
 
 //delete
-router.delete("/:id", async(req, res) => {
+router.delete("/:id", verifyToken, async(req, res) => {
     try {
         await Post.findByIdAndDelete(req.params.id);
         res.status(200).json("Post deleted successfully");
