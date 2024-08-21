@@ -37,9 +37,16 @@ router.post("/login", async(req, res)=>{
             return res.status(401).json("Invalid Credentials");
         }
         
-        const token = jwt.sign({id:user._id}, process.env.SECRET, {expiresIn:"1d"});
-        const {password, ...info} = user._doc;
-        res.cookie("token", token).status(200).json(info);
+        const token=jwt.sign({_id:user._id,username:user.username,email:user.email},process.env.SECRET,{expiresIn:"3d"})
+        const {password,...info}=user._doc
+        res.cookie('token', token, {
+            httpOnly: true, 
+            secure: false,
+            path: '/', 
+            sameSite: 'strict', 
+        });
+
+        res.status(200).json({ message: 'Login successful', info });    
     }
     catch(err){
         res.status(500).json(err);
@@ -53,6 +60,17 @@ router.get("/logout", (req, res)=>{
     } catch (error) {
         res.status(500).json(error);
     }
+})
+
+//refetch user
+router.get("/refetch", (req,res)=>{
+    const token=req.cookies.token
+    jwt.verify(token,process.env.SECRET,{},async (err,data)=>{
+        if(err){
+            return res.status(404).json(err)
+        }
+        res.status(200).json(data)
+    })
 })
 
 module.exports = router;
