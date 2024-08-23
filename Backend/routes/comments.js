@@ -29,6 +29,7 @@ router.put("/:id", verifyToken, async(req, res) => {
 //delete
 router.delete("/:id", verifyToken, async(req, res) => {
     try {
+        
         await Comment.findByIdAndDelete(req.params.id);
         res.status(200).json("Comment deleted successfully");
 

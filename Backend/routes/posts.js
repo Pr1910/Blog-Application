@@ -1,7 +1,9 @@
 const express=require('express')
 const router=express.Router()
 const Post=require('../models/Post');
+const Comment = require('../models/Comment')
 const verifyToken = require('../Middlewares/verifyToken');
+const cloudinary = require('cloudinary').v2;
 
 //create
 router.post("/create", verifyToken, async(req, res)=>{
@@ -28,7 +30,19 @@ router.put("/:id", verifyToken, async(req, res) => {
 //delete
 router.delete("/:id", verifyToken, async(req, res) => {
     try {
+        const post = await Post.findById(req.params.id);
+        const imageURL = post.photo.split('/');
+        const image = imageURL[imageURL.length - 1]
+        const imageName = image.split('.')[0]
+        console.log(imageName);
+        cloudinary.uploader.destroy(imageName, (err, res)=>{
+            // if(err){
+            //     console.log("Image not deleted from cloud.");
+            // }
+
+        })
         await Post.findByIdAndDelete(req.params.id);
+        await Comment.deleteMany({postId:req.params.id})
         res.status(200).json("Post deleted successfully");
 
     } catch (error) {
