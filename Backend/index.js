@@ -5,11 +5,11 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const multer = require('multer')
-const authRoute = require('./routes/auth')
-const userRoute = require('./routes/users')
-const postRoute = require('./routes/posts')
-const commentRoute = require('./routes/comments')
-const cloudinary = require('./utils/cloudinary')
+const authRoute = require('./routes/auth.js')
+const userRoute = require('./routes/users.js')
+const postRoute = require('./routes/posts.js')
+const commentRoute = require('./routes/comments.js')
+const cloudinary = require('./utils/cloudinary.js')
 
 //database connection
 const connectDB = async() =>{

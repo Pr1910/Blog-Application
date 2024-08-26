@@ -1,10 +1,10 @@
 const express=require('express')
 const router=express.Router()
-const User=require('../models/User')
-const Post=require('../models/Post')
-const Comment=require('../models/Comment')
+const User=require('../models/User.js')
+const Post=require('../models/Post.js')
+const Comment=require('../models/Comment.js')
 const bcrypt=require('bcrypt')
-const verifyToken = require('../Middlewares/verifyToken')
+const verifyToken = require('../Middlewares/verifyToken.js')
 
 
 //update

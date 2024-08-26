@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router()
-const Comment=require('../models/Comment')
-const Post=require('../models/Post')
+const Comment=require('../models/Comment.js')
+const Post=require('../models/Post.js')
 const verifyToken = require('../Middlewares/verifyToken')
 
 //create

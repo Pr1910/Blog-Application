@@ -1,8 +1,8 @@
 const express=require('express')
 const router=express.Router()
-const Post=require('../models/Post');
-const Comment = require('../models/Comment')
-const verifyToken = require('../Middlewares/verifyToken');
+const Post=require('../models/Post.js');
+const Comment = require('../models/Comment.js')
+const verifyToken = require('../Middlewares/verifyToken.js');
 const cloudinary = require('cloudinary').v2;
 
 //create
