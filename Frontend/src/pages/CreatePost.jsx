@@ -51,7 +51,7 @@ const CreatePost = () => {
             
             //img upload
             try {
-                const imgUpload = await axios.post(URL + "/api/upload", data)
+                const imgUpload = await axios.post(URL + "/api/upload", data) 
                 //console.log(imgUpload.data.result.url);
                 post.photo = imgUpload.data.result.url;
             }
