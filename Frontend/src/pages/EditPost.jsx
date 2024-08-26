@@ -23,7 +23,7 @@ const EditPost = () => {
           const res=await axios.get(URL+"/api/posts/"+postId)
           setTitle(res.data.title)
           setDesc(res.data.desc)
-          console.log(res.data.photo)
+          //console.log(res.data.photo)
           setFile(res.data.photo)
           setCats(res.data.categories)
   

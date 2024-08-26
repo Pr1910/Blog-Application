@@ -25,7 +25,7 @@ const connectDB = async() =>{
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin:"http://localhost:5173",credentials:true}))
+app.use(cors({origin:process.env.FRONTEND_URL,credentials:true}))
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/api/posts', postRoute)
@@ -46,7 +46,7 @@ const storage=multer.diskStorage({
 
 const upload=multer({storage:storage})
 app.post("/api/upload",upload.single("file"),(req,res)=>{
-    cloudinary.uploader.upload(req.file.path, function(err, result){
+    cloudinary.uploader.upload(req.file?.path, function(err, result){
         if(err){
             console.log(err);
             return res.status(500).json("Error uploading the image");
