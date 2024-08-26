@@ -3,7 +3,7 @@ const router=express.Router()
 const Post=require('../models/Post.js');
 const Comment = require('../models/Comment.js')
 const verifyToken = require('../Middlewares/verifyToken.js');
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('../utils/cloudinary.js')
 
 //create
 router.post("/create", verifyToken, async(req, res)=>{
